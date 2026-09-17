@@ -1,0 +1,60 @@
+---
+const faqs = [
+  {
+    q: '¿Qué es un préstamo con garantía inmobiliaria?',
+    a: 'Es un crédito respaldado por el valor de tu propiedad. No la transfieres, la usas como garantía.',
+  },
+  {
+    q: '¿Puedo perder mi propiedad?',
+    a: 'No por el simple hecho de solicitar el préstamo. La garantía respalda el crédito bajo las condiciones que se firman, no lo transfiere de entrada.',
+  },
+  {
+    q: '¿Cuánto tiempo tarda el proceso?',
+    a: 'Máximo 48 horas desde que envías tus documentos completos.',
+  },
+  {
+    q: '¿Qué documentos necesito?',
+    a: 'Identificación oficial, comprobante de domicilio y documentos de propiedad del inmueble. Te confirmamos la lista exacta al iniciar tu solicitud.',
+  },
+  {
+    q: '¿Cómo se calcula mi pago mensual?',
+    a: 'Depende del monto solicitado, el plazo elegido y el valor de tu garantía. Usa la calculadora para una estimación inmediata.',
+  },
+  {
+    q: '¿Puedo liquidar antes de tiempo?',
+    a: 'Sí. Te explicamos las condiciones exactas antes de firmar, sin sorpresas.',
+  },
+];
+---
+
+<section id="preguntas-frecuentes" class="bg-mist-100 py-24 sm:py-28">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="kicker justify-center text-aqua-700">06 · Preguntas frecuentes</p>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-3xl divide-y divide-ink/10 rounded-2xl bg-white ring-1 ring-ink/5">
+      {
+        faqs.map((item) => (
+          <details class="group px-6 py-2 sm:px-8">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-heading text-base font-semibold text-ink sm:text-lg">
+              {item.q}
+              <svg
+                class="h-5 w-5 shrink-0 text-aqua-700 transition-transform duration-200 group-open:rotate-45"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <p class="pb-6 pr-8 text-mist-700 leading-relaxed">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

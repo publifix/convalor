@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Aviso de privacidad — Convalor" description="Aviso de privacidad de Convalor.">
+  <Header />
+  <main class="mx-auto max-w-3xl px-5 py-24 sm:px-8">
+    <p class="kicker text-aqua-700">Legal</p>
+    <h1 class="mt-4 font-heading text-3xl font-bold text-ink sm:text-4xl">Aviso de privacidad</h1>
+    <p class="mt-6 leading-relaxed text-mist-700">
+      Este aviso de privacidad está pendiente de redacción y validación legal. No debe
+      considerarse vigente ni publicarse hasta que el equipo jurídico de Convalor confirme su
+      contenido final.
+    </p>
+    <p class="mt-4 leading-relaxed text-mist-700">
+      <!-- TODO(convalor): sustituir este marcador por el aviso de privacidad real antes de publicar el sitio. -->
+      Para dudas sobre el tratamiento de tus datos personales, contáctanos directamente.
+    </p>
+  </main>
+  <Footer />
+</BaseLayout>

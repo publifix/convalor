@@ -1,0 +1,64 @@
+---
+const points = [
+  {
+    title: 'Sin los requisitos imposibles del banco',
+    desc: 'El valor de tu inmueble es tu respaldo.',
+    icon: 'shield',
+  },
+  {
+    title: 'Condiciones claras',
+    desc: 'Sabes exactamente qué firmas, sin letras chiquitas.',
+    icon: 'doc',
+  },
+  {
+    title: 'Respuesta en 48 horas',
+    desc: 'Cuando necesitas liquidez, cada día cuenta.',
+    icon: 'clock',
+  },
+  {
+    title: 'Respaldo de grupo',
+    desc: 'Más de 11 años de experiencia en microfinanzas con Mi Préstamo Marlo.',
+    icon: 'building',
+  },
+  {
+    title: 'Trato humano',
+    desc: 'Acompañamiento directo por WhatsApp en cada paso.',
+    icon: 'chat',
+  },
+];
+
+const icons: Record<string, string> = {
+  shield: 'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z',
+  doc: 'M7 3h7l4 4v14H7V3Z M14 3v4h4 M9 12h6 M9 16h6',
+  clock: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z M12 7v5l3.5 2',
+  building: 'M4 21V7l8-4 8 4v14 M9 21v-6h6v6 M9 11h.01 M9 15h.01 M15 11h.01 M15 15h.01',
+  chat: 'M4 5h16v11H8l-4 4V5Z',
+};
+---
+
+<section id="nosotros" class="bg-mist-100 py-24 sm:py-28">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="kicker justify-center text-aqua-700">03 · Por qué Convalor</p>
+      <h2 class="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+        Garantía real, préstamo real
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        points.map((point) => (
+          <div class="rounded-2xl bg-white p-7 ring-1 ring-ink/5">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-aqua-100 text-aqua-700">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d={icons[point.icon]} />
+              </svg>
+            </span>
+            <h3 class="mt-5 font-heading text-lg font-semibold text-ink">{point.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mist-700">{point.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

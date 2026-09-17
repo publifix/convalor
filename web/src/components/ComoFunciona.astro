@@ -1,0 +1,41 @@
+---
+const steps = [
+  { num: '01', title: 'Llena tu solicitud', desc: 'En línea, en minutos.' },
+  { num: '02', title: 'Envía tus documentos', desc: 'Todo digital, sin filas.' },
+  { num: '03', title: 'Recibe tu préstamo', desc: 'Respuesta en máximo 48 horas.' },
+];
+---
+
+<section id="como-funciona" class="bg-white py-24 sm:py-28">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="kicker justify-center text-aqua-700">02 · Cómo funciona</p>
+      <h2 class="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+        De solicitud a liquidez, en 3 pasos
+      </h2>
+    </div>
+
+    <ol class="mt-16 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      {
+        steps.map((step, i) => (
+          <li class="relative flex flex-col items-start gap-4">
+            <span class="font-heading text-5xl font-bold text-aqua-100" aria-hidden="true">
+              {step.num}
+            </span>
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-ink">{step.title}</h3>
+              <p class="mt-2 text-mist-700">{step.desc}</p>
+            </div>
+            {i < steps.length - 1 && (
+              <span class="pointer-events-none absolute right-[-1.25rem] top-6 hidden text-mist-300 sm:block" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

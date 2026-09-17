@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/photos/hero-personas.jpg';
+import { WHATSAPP_NUMBER } from '../lib/constants';
+import { whatsappLink } from '../lib/loan';
+
+const whatsappHref = whatsappLink(
+  WHATSAPP_NUMBER,
+  'Hola, quiero solicitar mi préstamo por WhatsApp con Convalor.',
+);
+
+const trustPoints = ['Más de 11 años de experiencia', 'Respuesta en 48 horas', 'Condiciones claras'];
+---
+
+<section id="inicio" class="relative isolate overflow-hidden bg-navy text-white">
+  <Image
+    src={heroPhoto}
+    alt="Emprendedores atendiendo su negocio en Querétaro"
+    class="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_25%]"
+    widths={[640, 960, 1440, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    quality={70}
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-navy via-navy/85 to-navy/50" aria-hidden="true"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-navy/95 via-navy/60 to-transparent" aria-hidden="true"></div>
+
+  <div class="mx-auto flex max-w-content flex-col gap-10 px-5 py-24 sm:px-8 sm:py-32 lg:py-40">
+    <div class="max-w-2xl">
+      <p class="kicker text-aqua-300">Préstamos con garantía inmobiliaria</p>
+
+      <h1 class="mt-4 font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+        Tu Patrimonio. <span class="text-aqua-500">Tu Solución.</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
+        Convierte el valor de tu propiedad en liquidez real. Respuesta en máximo 48 horas, sin
+        letras chiquitas.
+      </p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="#calculadora" class="btn-primary">
+          Calcula tu préstamo
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </a>
+        <a href={whatsappHref} target="_blank" rel="noopener" class="btn-secondary">
+          Solicita por WhatsApp
+        </a>
+      </div>
+
+      <dl class="mt-14 grid grid-cols-1 gap-x-6 gap-y-4 border-t border-white/15 pt-8 sm:grid-cols-3">
+        {
+          trustPoints.map((point) => (
+            <div class="flex items-center gap-3">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-aqua-500/15 text-aqua-300">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 12l5 5L20 6" />
+                </svg>
+              </span>
+              <dt class="sr-only">Diferenciador</dt>
+              <dd class="text-sm font-medium text-white/85">{point}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+import { WHATSAPP_NUMBER } from '../lib/constants';
+import { whatsappLink } from '../lib/loan';
+
+const href = whatsappLink(
+  WHATSAPP_NUMBER,
+  'Hola, quiero solicitar mi préstamo con garantía inmobiliaria con Convalor.',
+);
+---
+
+<section class="bg-ink py-20 text-white sm:py-24">
+  <div class="mx-auto max-w-content px-5 text-center sm:px-8">
+    <h2 class="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
+      ¿Listo para convertir tu patrimonio en solución?
+    </h2>
+    <div class="mt-9">
+      <a href={href} target="_blank" rel="noopener" class="btn-primary">
+        Solicita tu préstamo
+      </a>
+    </div>
+  </div>
+</section>

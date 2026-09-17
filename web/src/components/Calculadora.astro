@@ -1,0 +1,208 @@
+---
+import { WHATSAPP_NUMBER } from '../lib/constants';
+import { LOAN_RANGE, TERM_RANGE, monthlyPayment, formatCurrency, whatsappLink } from '../lib/loan';
+
+const initialPayment = monthlyPayment(LOAN_RANGE.default, TERM_RANGE.default);
+const initialHref = whatsappLink(
+  WHATSAPP_NUMBER,
+  `Hola, quiero solicitar un préstamo de ${formatCurrency(LOAN_RANGE.default)} a ${TERM_RANGE.default} meses con Convalor.`,
+);
+---
+
+<section id="calculadora" class="relative overflow-hidden bg-mist-100 py-24 sm:py-28">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="kicker justify-center text-aqua-700">Calcula tu préstamo</p>
+      <h2 class="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+        Descubre cuánto puedes obtener por tu patrimonio
+      </h2>
+      <p class="mt-4 text-base text-mist-700 sm:text-lg">
+        Ajusta el monto y el plazo — el cálculo se actualiza al instante.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-14 max-w-4xl overflow-hidden rounded-[28px] bg-white shadow-[0_30px_70px_-40px_rgba(10,31,46,0.35)] ring-1 ring-ink/5">
+      <div class="grid gap-0 lg:grid-cols-[1.15fr_1fr]">
+        <!-- Panel de controles -->
+        <div class="p-6 sm:p-10">
+          <p class="text-sm font-semibold text-ink">Tipo de garantía</p>
+          <div class="mt-3 flex flex-wrap gap-3" role="group" aria-label="Tipo de garantía">
+            <button
+              type="button"
+              class="flex items-center gap-2.5 rounded-2xl border-2 border-aqua-500 bg-aqua-100 px-5 py-3 text-sm font-semibold text-ink"
+              aria-pressed="true"
+            >
+              <svg class="h-4 w-4 text-aqua-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 11.5 12 4l9 7.5" />
+                <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" />
+              </svg>
+              Inmueble
+            </button>
+            <!-- Más tipos de garantía se agregan aquí sin rediseñar la sección. -->
+          </div>
+
+          <div class="mt-9">
+            <div class="flex items-baseline justify-between gap-3">
+              <label for="monto" class="text-sm font-semibold text-ink">¿Cuánto necesitas?</label>
+              <span id="monto-valor" class="font-heading text-2xl font-bold tabular-nums text-ink sm:text-3xl">
+                {formatCurrency(LOAN_RANGE.default)}
+              </span>
+            </div>
+            <input
+              id="monto"
+              type="range"
+              class="convalor-range mt-4"
+              min={LOAN_RANGE.min}
+              max={LOAN_RANGE.max}
+              step={LOAN_RANGE.step}
+              value={LOAN_RANGE.default}
+              aria-describedby="monto-valor"
+            />
+            <div class="mt-2 flex justify-between text-xs font-medium text-mist-500">
+              <span>{formatCurrency(LOAN_RANGE.min)}</span>
+              <span>{formatCurrency(LOAN_RANGE.max)}</span>
+            </div>
+          </div>
+
+          <div class="mt-9">
+            <div class="flex items-baseline justify-between gap-3">
+              <label for="plazo" class="text-sm font-semibold text-ink">¿En cuánto tiempo lo pagas?</label>
+              <span id="plazo-valor" class="font-heading text-2xl font-bold tabular-nums text-ink sm:text-3xl">
+                {TERM_RANGE.default} meses
+              </span>
+            </div>
+            <input
+              id="plazo"
+              type="range"
+              class="convalor-range mt-4"
+              min={TERM_RANGE.min}
+              max={TERM_RANGE.max}
+              step={TERM_RANGE.step}
+              value={TERM_RANGE.default}
+              aria-describedby="plazo-valor"
+            />
+            <div class="mt-2 flex justify-between text-xs font-medium text-mist-500">
+              <span>{TERM_RANGE.min} meses</span>
+              <span>{TERM_RANGE.max} meses</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de resultado -->
+        <div class="flex flex-col justify-between bg-navy p-6 text-white sm:p-10">
+          <div>
+            <p class="text-sm font-medium text-white/70">Tu pago mensual aproximado</p>
+            <p id="pago-valor" class="mt-3 font-heading text-4xl font-bold tabular-nums text-aqua-500 sm:text-5xl">
+              {formatCurrency(initialPayment)}
+            </p>
+
+            <p class="mt-5 text-xs leading-relaxed text-white/55">
+              Esta es una estimación y no representa un compromiso de crédito. Tu tasa final se
+              confirma tras el análisis de tu garantía.
+            </p>
+          </div>
+
+          <a
+            id="cta-solicitar"
+            href={initialHref}
+            target="_blank"
+            rel="noopener"
+            class="btn-primary mt-9 w-full"
+          >
+            Solicitar este monto
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .convalor-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #01c7b8 0%, #c9cfd1 0%);
+    outline-offset: 6px;
+  }
+
+  .convalor-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 26px;
+    width: 26px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 3px solid #01c7b8;
+    box-shadow: 0 6px 16px -4px rgba(10, 31, 46, 0.45);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .convalor-range::-webkit-slider-thumb:hover,
+  .convalor-range::-webkit-slider-thumb:active {
+    transform: scale(1.08);
+  }
+
+  .convalor-range::-moz-range-thumb {
+    height: 26px;
+    width: 26px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 3px solid #01c7b8;
+    box-shadow: 0 6px 16px -4px rgba(10, 31, 46, 0.45);
+    cursor: pointer;
+  }
+
+  .convalor-range::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: transparent;
+  }
+</style>
+
+<script>
+  import { monthlyPayment, formatCurrency, whatsappLink } from '../lib/loan';
+  import { WHATSAPP_NUMBER } from '../lib/constants';
+
+  const montoInput = document.getElementById('monto') as HTMLInputElement | null;
+  const plazoInput = document.getElementById('plazo') as HTMLInputElement | null;
+  const montoValor = document.getElementById('monto-valor');
+  const plazoValor = document.getElementById('plazo-valor');
+  const pagoValor = document.getElementById('pago-valor');
+  const cta = document.getElementById('cta-solicitar') as HTMLAnchorElement | null;
+
+  function fillTrack(input: HTMLInputElement) {
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const val = Number(input.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    input.style.background = `linear-gradient(to right, #01c7b8 ${pct}%, #C9CFD1 ${pct}%)`;
+  }
+
+  function update() {
+    if (!montoInput || !plazoInput || !montoValor || !plazoValor || !pagoValor || !cta) return;
+
+    const monto = Number(montoInput.value);
+    const plazo = Number(plazoInput.value);
+    const pago = monthlyPayment(monto, plazo);
+
+    montoValor.textContent = formatCurrency(monto);
+    plazoValor.textContent = `${plazo} meses`;
+    pagoValor.textContent = formatCurrency(pago);
+
+    cta.href = whatsappLink(
+      WHATSAPP_NUMBER,
+      `Hola, quiero solicitar un préstamo de ${formatCurrency(monto)} a ${plazo} meses con Convalor.`,
+    );
+
+    fillTrack(montoInput);
+    fillTrack(plazoInput);
+  }
+
+  montoInput?.addEventListener('input', update);
+  plazoInput?.addEventListener('input', update);
+  update();
+</script>

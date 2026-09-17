@@ -1,14 +1,14 @@
 name: Deploy Pages
 
-# Publishes site/ to GitHub Pages after every push, so progress is visible
-# on a live link without waiting for a merge to main.
+# Builds web/ (Astro + Tailwind) and publishes it to GitHub Pages after every
+# push, so progress is visible on a live link after each round of changes.
 on:
   push:
     branches:
       - main
       - 'claude/**'
     paths:
-      - 'site/**'
+      - 'web/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -24,23 +24,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Type-check and build
+        working-directory: web
+        run: npm run build
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

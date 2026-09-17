@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/**
+ * Tokens tomados literalmente de "Manual de Marca Convalor" (v1.0 · 2026),
+ * §03 Sistema cromático y §04 Tipografía.
+ */
+@theme {
+  --color-ink: #0a0a0a; /* Negro Convalor */
+  --color-navy: #0a1f2e; /* Navy Convalor — secundario institucional */
+
+  --color-aqua-100: #e0faf7;
+  --color-aqua-300: #7fe6da;
+  --color-aqua-500: #01c7b8;
+  --color-aqua-700: #018f84;
+  --color-aqua-900: #015b54;
+
+  --color-mist-100: #f2f3f3;
+  --color-mist-300: #c9cfd1;
+  --color-mist-500: #8b9598;
+  --color-mist-700: #3d4547;
+
+  --color-alert: #f5a623;
+  --color-danger: #e5484d;
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-sans: Inter, sans-serif;
+
+  --max-width-content: 1200px;
+
+  --shadow-aqua: 0 0 0 1px rgba(1, 199, 184, 0.35), 0 12px 32px -12px rgba(1, 199, 184, 0.45);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-white text-ink font-sans antialiased;
+  }
+
+  /* Manual de Marca §04: "Sans-serif exclusivamente. Sin serifas, ni en legales." */
+  body,
+  input,
+  button,
+  textarea,
+  select,
+  small,
+  a {
+    font-family: Inter, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  :focus-visible {
+    outline: 2px solid #01c7b8;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .kicker {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-aqua-900 flex items-center;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition duration-200 ease-out focus-visible:outline-offset-4;
+  }
+
+  .btn-primary {
+    @apply bg-aqua-500 text-ink shadow-aqua hover:bg-aqua-300 active:bg-aqua-900 active:text-white;
+  }
+
+  .btn-secondary {
+    @apply border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-aqua-500/60 hover:bg-white/10;
+  }
+
+  .btn-ghost {
+    @apply border border-ink/15 text-ink hover:border-aqua-700 hover:text-aqua-900;
+  }
+}
