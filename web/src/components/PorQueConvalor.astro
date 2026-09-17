@@ -25,6 +25,13 @@ const points = [
     desc: 'Acompañamiento directo por WhatsApp en cada paso.',
     icon: 'chat',
   },
+  {
+    // Copy tomado casi textual del Manual de Marca, §01 "Por qué modernizamos la imagen":
+    // "Convalor deja de verse como trámite y empieza a verse como respaldo."
+    title: 'Solidez',
+    desc: 'Convalor es institución, no financiera de trámite.',
+    icon: 'layers',
+  },
 ];
 
 const icons: Record<string, string> = {
@@ -33,13 +40,14 @@ const icons: Record<string, string> = {
   clock: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z M12 7v5l3.5 2',
   building: 'M4 21V7l8-4 8 4v14 M9 21v-6h6v6 M9 11h.01 M9 15h.01 M15 11h.01 M15 15h.01',
   chat: 'M4 5h16v11H8l-4 4V5Z',
+  layers: 'M12 3 3 8l9 5 9-5-9-5Z M3 13l9 5 9-5 M3 8v5 M21 8v5',
 };
 ---
 
 <section id="nosotros" class="bg-mist-100 py-24 sm:py-28">
   <div class="mx-auto max-w-content px-5 sm:px-8">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="kicker justify-center text-aqua-700">03 · Por qué Convalor</p>
+      <p class="kicker justify-center">03 · Por qué Convalor</p>
       <h2 class="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl">
         Garantía real, préstamo real
       </h2>
